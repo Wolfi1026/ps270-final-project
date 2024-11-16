@@ -33,11 +33,11 @@ data
 
 ```{r}
 data |> 
-  mutate(date = as.Date(date, format = "%m/%d/%y")) |> 
+  mutate(date = as.Date(date, format = "%m/%d/%Y")) |> 
   ggplot(aes(x = swing_democrat, y = date)) +
   geom_point(color = "steelblue1")
 ```
 
-
+According to the data, special elections that took place in 2021 and early 2022 show a relatively equal swing between both parties in special elections. in the later half of 2022 and beyond, the special election margin swing goes heavily for the Democrats.
 
 
