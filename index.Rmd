@@ -40,4 +40,20 @@ data |>
 
 According to the data, special elections that took place in 2021 and early 2022 show a relatively equal swing between both parties in special elections. in the later half of 2022 and beyond, the special election margin swing goes heavily for the Democrats.
 
+```{r}
+data |> 
+  mutate(date = as.Date(date, format = "%m/%d/%Y")) |> 
+  slice(1:9) |> 
+  ggplot(aes(x = swing_democrat, y = date)) +
+  geom_point(color = "steelblue1")
+```
+As can be seen in the above graph, I filtered out the special elections that took ploace between Biden's election and the Dobbs decision. The margin swing is relatively even.
 
+```{r}
+data |> 
+  mutate(date = as.Date(date, format = "%m/%d/%Y")) |> 
+  slice(10:50) |> 
+  ggplot(aes(x = swing_democrat, y = date)) +
+  geom_point(color = "steelblue1")
+```
+This graph shows the special elections post Dobbs. The Margin swing heavily favors the Democrats in special elections following the Overturning of Roe.
