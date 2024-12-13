@@ -1,7 +1,7 @@
 ---
-title: "PS270 Final Project"
+title: "The Dobbs Democrats"
 author: "Wolfi Vetter"
-description: "My final project"
+description: "How the Dobbs decision ignitied Democratic voters and took them to the polls"
 output:
   distill::distill_article:
     self_contained: false
@@ -11,18 +11,14 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...
-how Democrats have consistently overperformed in off-year elections since Roe v. Wade was overturned.
 
+Question: How do election results skew differently following the Supreme Court's decision to overturn Roe v. Wade? I believe that the election results have skewed more heavily towards the Democratic party following the termination of Roe. This is evident in abortion ballot initiatives, the 2022 Congressional midterms, and special elections occurring in 2023 and 2024, leading up to the 2024 presidential election. In order to properly conclude this idea, I will need to show polls and subsequent exit polls for the 2022 midterms and special elections, not only in districts that lean Republican but also districts that lean Democratic. Thankfully I already have a small list of examples from both sides of this coin which I can use as a starting base. Additionally, I recall an MSNBC video where Chris Hayes explains how Democrats have overperformed consistently in 2023 special elections by an average of 8 points. If I can find that video, it should have a list of these elections and can further help my case.
 
-
-Question: How do election results skew differently following the Supreme Court's decision to overturn Roe v. Wade? I believe that the election results have skewed more heavily towards the Democratic party following the termination of Roe. This is evident in abortion ballot initiatives, the 2022 Congressional midterms, and special elections occurring in 2023 and 2024, leading up to the 2024 presidential election. In order to properly conclude this idea, I will need to show polls and subsequent exit polls for the 2022 midterms and special elections, not only in districts that lean Republican but also districts that lean Democratic. Thankfully I already have a small list of examples from both sides of thi coin which I can use as a starting base. Additionally, I recall an MSNBC video where Chris Hayes explains how Democrats have overperformed consistently in 2023 special elections by an average of 8 points. If I can find that video, it should have a list of these elections and can further help my case.
+I find this data important because prior to the 2024 General Presidential Election, I used this as one of many factors to predict the 2024 Election. The fact that the elections have skewed more in favor of the Democratic candidates after the Dobbs decision have given a strong hint that the Democrats were being conisistently underestimated going into the 2024 election season.
 
 Democrats Overperforming in Special Elections 2023:
 
-(Look into special elections pre-dobbs, 2021 and 2022)
 
-(Make sure to commit everything)
 
 ```{r}
 library(tidyverse)
@@ -30,12 +26,15 @@ data <- read_csv("data/overperformance.csv")
 data
 ```
 
+I've labeled the whole dataset as Overperformance and made the following variables: Date, which refers to the date of a special election; precinct, which is where the special election took place; margin_swing, which tells us the victorious candidate in the special election and difference in their victory compared to the margin of victory either labeled by polls or by how the voters of the precinct voted in the 2020 election; and swing_democrat, which is the same numbers, but whichever district had a Republican margin swing the number would be a negative number.
+
 
 ```{r}
 data |> 
   mutate(date = as.Date(date, format = "%m/%d/%Y")) |> 
   ggplot(aes(x = swing_democrat, y = date)) +
-  geom_point(color = "steelblue1")
+  geom_point(color = "steelblue1") +
+    labs(title = "Special Elections During the Biden Administration", x = "Margin Swing of Precinct Relative to the 2020 Election", y = "Date of Special Election")
 ```
 
 According to the data, special elections that took place in 2021 and early 2022 show a relatively equal swing between both parties in special elections. in the later half of 2022 and beyond, the special election margin swing goes heavily for the Democrats.
@@ -45,7 +44,8 @@ data |>
   mutate(date = as.Date(date, format = "%m/%d/%Y")) |> 
   slice(1:9) |> 
   ggplot(aes(x = swing_democrat, y = date)) +
-  geom_point(color = "steelblue1")
+  geom_point(color = "steelblue1") +
+  labs(title = "Special Elections During the Biden Administration", x = "Margin Swing of Precinct Relative to the 2020 Election", y = "Special Elections Before the Dobbs Decision")
 ```
 As can be seen in the above graph, I filtered out the special elections that took ploace between Biden's election and the Dobbs decision. The margin swing is relatively even.
 
@@ -54,6 +54,10 @@ data |>
   mutate(date = as.Date(date, format = "%m/%d/%Y")) |> 
   slice(10:50) |> 
   ggplot(aes(x = swing_democrat, y = date)) +
-  geom_point(color = "steelblue1")
+  geom_point(color = "steelblue1") +
+  labs(title = "Special Elections During the Biden Administration", x = "Margin Swing of Precinct Relative to the 2020 Election", y = "Special Elections After the Dobbs Decision")
 ```
 This graph shows the special elections post Dobbs. The Margin swing heavily favors the Democrats in special elections following the Overturning of Roe.
+
+
+The resulting graphs, isolated as well as together, shows how rapidly and radically the Democrats had special election victories after Roe v. Wade was overturned. The American electorate had a massive backlash, indicating that they knew the Republican Party would not be willing to codify Roe into federal law, and as a result, made a massive effort to vote for Democrats so that they would have a chance to, if not codify Roe, at least prevent the Republican Party from taking abortion bans one step further than just the state level.
